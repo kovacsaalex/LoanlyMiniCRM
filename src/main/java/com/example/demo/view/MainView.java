@@ -147,7 +147,7 @@ public class MainView extends VerticalLayout {
 		        TextField socialSecurityCard = new TextField("Taj szám");
 		        socialSecurityCard.setWidth("150px");		        
 		        TextField cardId = new TextField("Személyi igazolvány szám");
-		        cardId.setWidth("150px");
+		        cardId.setWidth("200px");
 		        TextField addressCardID = new TextField("Lakcímkártya száma");
 		        addressCardID.setWidth("150px");
 		        
@@ -224,9 +224,14 @@ public class MainView extends VerticalLayout {
         	
         	
         	});
-		        
-		  
-		        
+        
+        
+        homeText.addClickListener(event -> {        
+        	content.removeAll();
+        
+        	
+        	
+        	});
 //	    
 		       
 
