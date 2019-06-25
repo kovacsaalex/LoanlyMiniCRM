@@ -1,33 +1,41 @@
 package com.example.demo.view;
 
+import java.time.LocalDate;
+
 public class Contact {
     String FirstName;
-    int year;
+    LocalDate selectedDate;
     public Contact() {
   		
   	}
     
     
-    public Contact(String firstName, int year) {
+    public Contact(String firstName, LocalDate selectedDate) {
 		
 		FirstName = firstName;
-		this.year = year;
+		this.selectedDate = selectedDate;
 	}
+
 
 	public String getFirstName() {
-        return FirstName;
-    }
-
-    public void setFirstName(String firstName) {
-        FirstName = firstName;
-    }
-
-	public int getYear() {
-		return year;
+		return FirstName;
 	}
 
-	public void setYear(int year) {
-		this.year = year;
+
+	public void setFirstName(String firstName) {
+		FirstName = firstName;
 	}
+
+
+	public LocalDate getSelectedDate() {
+		return selectedDate;
+	}
+
+
+	public void setSelectedDate(LocalDate selectedDate) {
+		this.selectedDate = selectedDate;
+	}
+
+
     
 }

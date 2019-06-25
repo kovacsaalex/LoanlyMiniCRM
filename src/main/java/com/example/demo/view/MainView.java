@@ -1,8 +1,14 @@
 package com.example.demo.view;
 
 
+import java.awt.Event;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
+import org.apache.logging.log4j.message.Message;
+
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -30,6 +36,8 @@ public class MainView extends VerticalLayout {
 	private static final long serialVersionUID = 1L;
 	Binder<Contact> binder = new Binder<>();
 //    FormLayout nameLayout = new FormLayout();
+	LocalDate selectedDate = LocalDate.now();
+ DateTimeFormatter formatter = DateTimeFormatter.BASIC_ISO_DATE;
 
     public MainView() {
    
@@ -96,7 +104,13 @@ public class MainView extends VerticalLayout {
 		        navBar.add(name,homeText,clientText,loanText,ltpText);
         
         
-        
+		        // Create a grid bound to the list
+		        Grid<Contact> grid = new Grid<>();
+		        grid.setItems(new Contact("Alex",selectedDate));
+		        grid.addColumn(Contact::getFirstName).setHeader("Name");
+		        grid.addColumn(person -> person.selectedDate.format(formatter))
+		                .setHeader("Year of birth");
+
         
         
         
@@ -113,6 +127,9 @@ public class MainView extends VerticalLayout {
 		        TextField firstNameField = new TextField();
 		        firstNameField.setLabel("Vezetéknév");
 		        firstNameField.setRequiredIndicatorVisible(true);
+		      
+		       
+		        
 		//        firstNameField.setMaxWidth("200px");
 		        
 		        TextField lastNameField = new TextField();
@@ -130,7 +147,9 @@ public class MainView extends VerticalLayout {
 		        DatePicker birthDatePicker = new DatePicker();
 		        birthDatePicker.setLabel("Születési idő");
 		        birthDatePicker.setLocale(new Locale("hu"));
-		      
+		        birthDatePicker.addValueChangeListener(event -> {
+		            selectedDate = event.getValue();
+		        });
 		        
 		        NumberField postalCode = new NumberField("Iranyítószám");
 		        TextField city = new TextField();
@@ -173,7 +192,10 @@ public class MainView extends VerticalLayout {
 		        Label messageLabel = new Label();
 		        
 		        Button confirmButton = new Button("Mentés", event -> {
-		        	Notification.show("Mentve");
+		        	
+		        	grid.setItems(new Contact(firstNameField.getValue(),selectedDate));
+				        Notification.show(firstNameField.getValue());
+		        	
 		            messageLabel.setText("Confirmed!");
 		            dialog.close();
 		        });
@@ -204,13 +226,7 @@ public class MainView extends VerticalLayout {
 		        
 		        dialogButton.addClickListener(event -> dialog.open());
 		        
-		        // Create a grid bound to the list
-		        Grid<Contact> grid = new Grid<>();
-		        grid.setItems(new Contact("Alex",1979));
-		        grid.addColumn(Contact::getFirstName).setHeader("Name");
-		        grid.addColumn(person -> Integer.toString(person.getYear()))
-		                .setHeader("Year of birth");
-
+		       
 		        
 		        
 		        
