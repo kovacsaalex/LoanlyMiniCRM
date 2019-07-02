@@ -1,10 +1,7 @@
 package com.example.demo.repository;
 
 import com.example.demo.pojo.Client;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -26,5 +23,8 @@ public interface ClientRepository {
            "VALUES (#{lastname},#{firstname},#{maidenName},#{birthPlace},#{birthDate},#{motherName},#{postalCode},#{city},#{address},#{movingTime},#{personalID},#{cardId},#{addressCardID},#{taxID},#{socialSecurityCard},#{phoneNumber},#{email})")
 
     void create(Client client);
+
+    @Delete("DELETE FROM testdbase.client WHERE \"ID\"=#{Id} ")
+    void delete(Client client);
 
 }
