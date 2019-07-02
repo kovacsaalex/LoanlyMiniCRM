@@ -30,7 +30,7 @@ import com.vaadin.flow.router.Route;
 
 
 
-@Route("")
+@Route("old")
 public class MainView extends VerticalLayout {
 
 	private static final long serialVersionUID = 1L;
