@@ -73,7 +73,7 @@ class testView extends Composite<VerticalLayout>{
         H3 name = new H3("Loan(ly)");
         H3 headerH3 = new H3("Welcome");
         Text welcomeText = new Text("A program hitelügyintézőknek készült ügyfélnyilvántartó. // \n" + 
-        		"The program is a customer registry for financyal and loan experts.");
+        		"The program is a customer registry for financial and loan experts.");
        
         
         Text text = new Text("Az alábbi tervezett funkciói lesznek: // The following planned features will be:");
