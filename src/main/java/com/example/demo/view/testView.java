@@ -70,7 +70,7 @@ class testView extends Composite<VerticalLayout>{
         deleteButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY, ButtonVariant.LUMO_ERROR);
         clientButton.getStyle().set("color", "white");
         
-        H3 name = new H3("Loan(ly)");
+        H3 name = new H3("LoanLy");
         H3 headerH3 = new H3("Welcome");
         Text welcomeText = new Text("A program hitelügyintézőknek készült ügyfélnyilvántartó. // \n" + 
         		"The program is a customer registry for financial and loan experts.");
