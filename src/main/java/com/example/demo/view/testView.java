@@ -79,7 +79,7 @@ class testView extends Composite<VerticalLayout>{
         Text text = new Text("Az alábbi tervezett funkciói lesznek: // The following planned features will be:");
         Checkbox checkbox1= new Checkbox();
         checkbox1.setLabel("Ügyfelek, a hozzájuk kapcsolódó hitelek és LTP-k nyilvántartása // Registration of clients, related loans and LTPs");
-        checkbox1.setValue(true);
+        checkbox1.setValue(false);
         Checkbox checkbox2= new Checkbox();
         checkbox2.setLabel("Adatok importálása egy fomrázott Excel fájlból // Import data from a special Excel file");
         checkbox2.setValue(false);
@@ -88,11 +88,11 @@ class testView extends Composite<VerticalLayout>{
         		"Fill out loan applications based on data you have already entered");
         checkbox3.setValue(false);
         Checkbox checkbox4= new Checkbox();
-        checkbox3.setLabel("OTP");
-        checkbox3.setValue(false);
-        Checkbox checkbox5= new Checkbox();
-        checkbox4.setLabel("CIB");
+        checkbox4.setLabel("OTP");
         checkbox4.setValue(false);
+        Checkbox checkbox5= new Checkbox();
+        checkbox5.setLabel("CIB");
+        checkbox5.setValue(false);
         
         
         getContent().setSizeFull();
@@ -104,7 +104,9 @@ class testView extends Composite<VerticalLayout>{
         header.setWidth("100%");
 	    header.setPadding(true);
 	    header.setHeight("80px");
+	    //header.getStyle().set("background-color", "#444444");
 	    header.getStyle().set("background-color", "#444444");
+	    
 	  
 	    headerComponentsV.add(headerComponentsH);
 	    headerComponentsH.add(homeButton, clientButton, loanButton, ltpButton);
@@ -146,7 +148,7 @@ class testView extends Composite<VerticalLayout>{
         });
      
 
-        content.add(headerH3,welcomeText,text,checkbox1,checkbox2,checkbox3,checkbox4);
+        content.add(headerH3,welcomeText,text,checkbox1,checkbox2,checkbox3,checkbox4,checkbox5);
         center.add(content);
 //	        center.setFlexGrow(1, navBar);
         // content.setAlignSelf(Alignment.END, footer);
@@ -156,7 +158,7 @@ class testView extends Composite<VerticalLayout>{
         
         homeButton.addClickListener(event -> {
             content.removeAll();
-            content.add(headerH3,welcomeText,text,checkbox1,checkbox2,checkbox3,checkbox4);
+            content.add(headerH3,welcomeText,text,checkbox1,checkbox2,checkbox3,checkbox4,checkbox5);
 
         });
 
