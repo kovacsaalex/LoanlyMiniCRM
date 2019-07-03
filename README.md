@@ -1,4 +1,4 @@
-# LoanlyMiniCRM
+# LoanLyMiniCRM
 
 Welcome this is "LoanLy", java/spring based application for financial and loan experts.
 
