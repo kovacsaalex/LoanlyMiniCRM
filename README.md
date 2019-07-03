@@ -1,6 +1,6 @@
 # LoanLyMiniCRM
 
-Welcome this is "LoanLy", Java/Spring/Vaadin based application for financial and loan experts.
+Welcome this is "LoanLy", Java/Spring-boot/Vaadin based application for financial and loan experts.
 
 Az alábbi tervezett funkciói lesznek: // The following planned features will be:
 
