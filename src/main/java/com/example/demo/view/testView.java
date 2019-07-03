@@ -88,10 +88,10 @@ class testView extends Composite<VerticalLayout>{
         		"Fill out loan applications based on data you have already entered");
         checkbox3.setValue(false);
         Checkbox checkbox4= new Checkbox();
-        checkbox4.setLabel("OTP");
+        checkbox4.setLabel("OTP Bank");
         checkbox4.setValue(false);
         Checkbox checkbox5= new Checkbox();
-        checkbox5.setLabel("CIB");
+        checkbox5.setLabel("CIB Bank");
         checkbox5.setValue(false);
         
         
