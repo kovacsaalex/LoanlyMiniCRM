@@ -8,23 +8,25 @@ import java.util.List;
 @Mapper
 public interface ClientRepository {
 
-    //@Select("SELECT * FROM `tesDBase`.client;")
-    @Select("SELECT * FROM testdbase.client;")
-    List<Client> findAll();
+	// @Select("SELECT * FROM `tesDBase`.client;")
+	@Select("SELECT * FROM testdbase.client;")
+	List<Client> findAll();
 
-    @Update("UPDATE testdbase.client SET lastname=#{lastname}, firstname=#{firstname} WHERE id=#{Id}")
-    void update(Client client);
-    
+	@Update("UPDATE into testdbase.client SET lastname=#{lastname},firstname=#{firstname},\"maidenName\"=#{maidenName}, \"birthPlace\"=#{birthPlace},\"birthDate\"=#{birthDate},\"motherName\"=#{motherName},\"postalCode\"=#{postalCode},city=#{city},address=#{address},\"movingTime\"=#{movingTime},\"personalID\"=#{personalID},\"cardId\"=#{cardId},\"addressCardID\"=#{addressCardID},\"taxID\"=#{taxID},\"socialSecurityCard\"=#{socialSecurityCard},\"phoneNumber\"=#{phoneNumber},email=#{email}")
+	// @Update("UPDATE testdbase.client SET lastname=#{lastname},
+	// firstname=#{firstname} WHERE id=#{Id}")
+	void update(Client client);
+
 //    @Insert("INSERT into `tesDBase`.client (`lastname`,`firstname`,maidenName, birthPlace,birthDate,motherName,postalCode,city,address,movingTime,personalID,cardId,addressCardID,taxID,socialSecurityCard,phoneNumber,email) " +
 //            "VALUES (#{lastname}, #{firstname},#{maidenName},#{birthPlace},#{birthDate},#{motherName},#{postalCode},#{city},#{address},#{movingTime},#{personalID},#{cardId},#{addressCardID},#{taxID},#{socialSecurityCard},#{phoneNumber},#{email})")
 //@Insert("INSERT into testdbase.client (lastname,firstname) VALUES (#{lastname}, #{firstname})")
 
-    @Insert("INSERT into testdbase.client (lastname,firstname,\"maidenName\", \"birthPlace\",\"birthDate\",\"motherName\",\"postalCode\",city,address,\"movingTime\",\"personalID\",\"cardId\",\"addressCardID\",\"taxID\",\"socialSecurityCard\",\"phoneNumber\",email) " +
-           "VALUES (#{lastname},#{firstname},#{maidenName},#{birthPlace},#{birthDate},#{motherName},#{postalCode},#{city},#{address},#{movingTime},#{personalID},#{cardId},#{addressCardID},#{taxID},#{socialSecurityCard},#{phoneNumber},#{email})")
+	@Insert("INSERT into testdbase.client (lastname,firstname,\"maidenName\", \"birthPlace\",\"birthDate\",\"motherName\",\"postalCode\",city,address,\"movingTime\",\"personalID\",\"cardId\",\"addressCardID\",\"taxID\",\"socialSecurityCard\",\"phoneNumber\",email) "
+			+ "VALUES (#{lastname},#{firstname},#{maidenName},#{birthPlace},#{birthDate},#{motherName},#{postalCode},#{city},#{address},#{movingTime},#{personalID},#{cardId},#{addressCardID},#{taxID},#{socialSecurityCard},#{phoneNumber},#{email})")
 
-    void create(Client client);
+	void create(Client client);
 
-    @Delete("DELETE FROM testdbase.client WHERE \"ID\"=#{Id} ")
-    void delete(Client client);
+	@Delete("DELETE FROM testdbase.client WHERE \"ID\"=#{Id} ")
+	void delete(Client client);
 
 }
