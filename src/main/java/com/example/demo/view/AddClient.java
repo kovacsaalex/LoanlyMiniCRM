@@ -7,6 +7,7 @@ import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -51,7 +52,7 @@ public class AddClient extends Composite<VerticalLayout> {
     private TextField phoneNumber = new TextField("Mobil");
     private TextField email = new TextField("E-mail");
 
-    private Text dialogLabelText = new Text("Új ügyfél adatai");
+    private H3 dialogLabelText = new H3("Új ügyfél adatai");
 
     private Button confirmButton = new Button("Mentés");
     private Button create = new Button("Új");
