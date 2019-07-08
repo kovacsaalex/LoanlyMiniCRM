@@ -10,7 +10,7 @@ Az alábbi tervezett funkciói lesznek: // The following planned features will b
 - [ ] age/ loan term, age/saving statics etc. 
 - [ ] compare interest rate in singed contract with actual
 
-The program is under developmentent!!
+The program is under development!!
 
 Check the app here:
 
