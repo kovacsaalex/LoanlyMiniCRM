@@ -12,7 +12,7 @@ public interface ClientRepository {
 	@Select("SELECT * FROM testdbase.client;")
 	List<Client> findAll();
 
-	@Update("UPDATE into testdbase.client SET lastname=#{lastname},firstname=#{firstname},\"maidenName\"=#{maidenName}, \"birthPlace\"=#{birthPlace},\"birthDate\"=#{birthDate},\"motherName\"=#{motherName},\"postalCode\"=#{postalCode},city=#{city},address=#{address},\"movingTime\"=#{movingTime},\"personalID\"=#{personalID},\"cardId\"=#{cardId},\"addressCardID\"=#{addressCardID},\"taxID\"=#{taxID},\"socialSecurityCard\"=#{socialSecurityCard},\"phoneNumber\"=#{phoneNumber},email=#{email}")
+	@Update("UPDATE testdbase.client SET lastname=#{lastname},firstname=#{firstname},\"maidenName\"=#{maidenName}, \"birthPlace\"=#{birthPlace},\"birthDate\"=#{birthDate},\"motherName\"=#{motherName},\"postalCode\"=#{postalCode},city=#{city},address=#{address},\"movingTime\"=#{movingTime},\"personalID\"=#{personalID},\"cardId\"=#{cardId},\"addressCardID\"=#{addressCardID},\"taxID\"=#{taxID},\"socialSecurityCard\"=#{socialSecurityCard},\"phoneNumber\"=#{phoneNumber},email=#{email} WHERE ID=#{id}")
 	// @Update("UPDATE testdbase.client SET lastname=#{lastname},
 	// firstname=#{firstname} WHERE id=#{Id}")
 	void update(Client client);
@@ -26,7 +26,7 @@ public interface ClientRepository {
 
 	void create(Client client);
 
-	@Delete("DELETE FROM testdbase.client WHERE \"ID\"=#{Id} ")
+	@Delete("DELETE FROM testdbase.client WHERE ID=#{id}")
 	void delete(Client client);
 
 }
