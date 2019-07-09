@@ -1,6 +1,6 @@
-package com.example.demo.repository;
+package com.example.demo.service;
 
-import com.example.demo.pojo.Client;
+import com.example.demo.model.Client;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

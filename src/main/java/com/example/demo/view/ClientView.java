@@ -1,7 +1,7 @@
 package com.example.demo.view;
 
-import com.example.demo.pojo.Client;
-import com.example.demo.repository.ClientRepository;
+import com.example.demo.model.Client;
+import com.example.demo.service.ClientRepository;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
@@ -21,10 +21,6 @@ import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.validator.EmailValidator;
 import com.vaadin.flow.data.validator.RegexpValidator;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.shared.Registration;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Route("clients")
 public class ClientView extends Composite<VerticalLayout> {
@@ -70,10 +66,7 @@ public class ClientView extends Composite<VerticalLayout> {
 
     private Button confirmButton = new Button("Mentés");
     private Button create = new Button("Új");
-    Button cancelButton = new Button("Bezárás");
     Button editSaveButton = new Button("Módosítás");
-
-
 
     final String REGEXNAME = "([A-Za-zaáeéiíoóöőuúüűAÁEÉIÍOÓÖŐUÚÜŰ .-]+)";
     final String REGEXPOSTALCODE = "\\d{4}$";
@@ -91,9 +84,6 @@ public class ClientView extends Composite<VerticalLayout> {
         idDataLayout = new HorizontalLayout();
         buttonLayout = new HorizontalLayout();
         contactDataLayout = new HorizontalLayout();
-
-
-
 
         firstname.setRequired(true);
         lastname.setRequired(true);
@@ -277,11 +267,16 @@ public class ClientView extends Composite<VerticalLayout> {
         dialogBaseLayout.add(dialogLabelText, personalDataLayout, addressDataLayout, idDataLayout, contactDataLayout);
 
         beforeFooter.add(clientAddButton,clientEditButton,deleteButton);
-        content.add(grid,beforeFooter);
+        content.setSizeFull();
+        content.setWidth("100%");
+        content.expand();
+        //content.getStyle().set("background-color", "lightgrey");
+        content.add(grid);
 
         // Click!
         create.addClickListener(event -> createClicked());
         confirmButton.addClickListener(event -> saveClicked());
+
 
         getContent().add(content);
     }

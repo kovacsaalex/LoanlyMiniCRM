@@ -1,6 +1,7 @@
 package com.example.demo.view;
 
-import com.example.demo.repository.ClientRepository;
+import com.example.demo.service.ClientRepository;
+import com.example.demo.service.LoanRepository;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
@@ -22,11 +23,13 @@ import com.vaadin.flow.theme.lumo.Lumo;
 public class BasicView extends Composite<VerticalLayout> {
 
     private final ClientRepository clientRepository;
+    private LoanRepository loanRepository;
 
 
     public BasicView(ClientRepository clientRepository) {
         this.clientRepository = clientRepository;
         ClientView clientView = new ClientView(clientRepository);
+        LoanView loanView = new LoanView(loanRepository);
 
         // Layouts HOME
         HorizontalLayout header = new HorizontalLayout();
@@ -36,7 +39,7 @@ public class BasicView extends Composite<VerticalLayout> {
         HorizontalLayout center = new HorizontalLayout();
         HorizontalLayout headerComponentsH = new HorizontalLayout();
         VerticalLayout headerComponentsV = new VerticalLayout();
-        HorizontalLayout beforeFooter = new HorizontalLayout();
+        HorizontalLayout beforeButtons = new HorizontalLayout();
         HorizontalLayout footer = new HorizontalLayout();
 
         getContent().setSizeFull();
@@ -48,8 +51,9 @@ public class BasicView extends Composite<VerticalLayout> {
         header.setHeight("80px");
         header.getStyle().set("background-color", "#444444");
         content.setWidth("100%");
+        //content.getStyle().set("background-color", "lightgreen");
         getContent().expand(contentVerticalLayout);
-        beforeFooter.setWidth("100%");
+        beforeButtons.setWidth("100%");
 
         // Texts
         H3 name = new H3("LoanLy");
@@ -95,10 +99,7 @@ public class BasicView extends Composite<VerticalLayout> {
 
         clientButton.addClickListener(event -> {
             content.removeAll();
-            content.add(clientView);
-        //    updateGrid();
-         //   beforeFooter.add(clientAddButton, clientEditButton, deleteButton);
-        //    content.add( clientView.getContent());
+            content.add(clientView.content,clientView.beforeFooter);
         });
 
         homeButton.addClickListener(event -> {
@@ -108,6 +109,7 @@ public class BasicView extends Composite<VerticalLayout> {
 
         loanButton.addClickListener(event -> {
             content.removeAll();
+            content.add(loanView.content,loanView.beforeFooter);
         });
 
         // Add components
