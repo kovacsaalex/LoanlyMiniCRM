@@ -17,7 +17,7 @@ public class Loan {
     private String idNumber;
     private String city;
     private String address;
-    private int postalCode;
+    private String postalCode;
     private int size;
     private int value;
     private String status;
@@ -25,7 +25,7 @@ public class Loan {
     public Loan() {
     }
 
-    public Loan(int loanId, String loanType, int amount, LocalDate loanStart, LocalDate loanEnd, int loanTerm, double interestRate, String idNumber, String city, String address, int postalCode, int size, int value, String status) {
+    public Loan(int loanId, String loanType, int amount, LocalDate loanStart, LocalDate loanEnd, int loanTerm, double interestRate, String idNumber, String city, String address, String postalCode, int size, int value, String status) {
         this.loanId = loanId;
         this.loanType = loanType;
         this.amount = amount;
@@ -122,11 +122,11 @@ public class Loan {
         this.address = address;
     }
 
-    public int getPostalCode() {
+    public String getPostalCode() {
         return postalCode;
     }
 
-    public void setPostalCode(int postalCode) {
+    public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
     }
 

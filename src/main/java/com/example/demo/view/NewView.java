@@ -20,18 +20,20 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.Theme;
 import com.vaadin.flow.theme.lumo.Lumo;
 
-@Route("")
+@Route("cc")
 @Theme(value = Lumo.class, variant = Lumo.LIGHT)
 
-public class BasicView extends Composite<VerticalLayout> {
+public class NewView extends Composite<VerticalLayout> {
 
     private Repository repository;
+    private Grid<Client> grid = new Grid<>();
 
-    public BasicView(Repository repository) {
-        this.repository = repository;
+    public NewView(Repository repository) {
+             this.repository=repository;
 
-        ClientView clientView = new ClientView(repository);
-        LoanView loanView = new LoanView(repository);
+
+   //        ClientView clientView = new ClientView(repository);
+   //        LoanView loanView = new LoanView(repository);
 
         // Layouts HOME
         HorizontalLayout header = new HorizontalLayout();
@@ -101,7 +103,9 @@ public class BasicView extends Composite<VerticalLayout> {
 
         clientButton.addClickListener(event -> {
             content.removeAll();
-            content.add(clientView.content, clientView.beforeFooter);
+    //        content.add(clientView.content,clientView.beforeFooter);
+
+
         });
 
         homeButton.addClickListener(event -> {
@@ -111,7 +115,7 @@ public class BasicView extends Composite<VerticalLayout> {
 
         loanButton.addClickListener(event -> {
             content.removeAll();
-            content.add(loanView.content, loanView.beforeFooter);
+     //       content.add(loanView.content,loanView.beforeFooter);
         });
 
         // Add components

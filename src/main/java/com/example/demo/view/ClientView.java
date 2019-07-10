@@ -2,6 +2,7 @@ package com.example.demo.view;
 
 import com.example.demo.model.Client;
 import com.example.demo.service.ClientRepository;
+import com.example.demo.service.Repository;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
@@ -26,27 +27,27 @@ import com.vaadin.flow.router.Route;
 public class ClientView extends Composite<VerticalLayout> {
     private Grid<Client> grid = new Grid<>();
     private Client client;
-    private final ClientRepository clientRepository;
-    Binder<Client> binder = new Binder<>(Client.class);
+    private Repository repository;
+    private Binder<Client> binder = new Binder<>(Client.class);
 
     private Dialog dialog = new Dialog();
     Dialog alert = new Dialog();
 
     VerticalLayout content = new VerticalLayout();
     private HorizontalLayout personalDataLayout = new HorizontalLayout();
-    private VerticalLayout dialogBaseLayout;
-    private HorizontalLayout addressDataLayout;
-    private HorizontalLayout idDataLayout;
-    private HorizontalLayout contactDataLayout;
-    private HorizontalLayout buttonLayout;
+    private VerticalLayout dialogBaseLayout = new VerticalLayout();
+    private HorizontalLayout addressDataLayout = new HorizontalLayout();
+    private HorizontalLayout idDataLayout = new HorizontalLayout();
+    private HorizontalLayout contactDataLayout = new HorizontalLayout();
+    private HorizontalLayout buttonLayout = new HorizontalLayout();
     HorizontalLayout beforeFooter = new HorizontalLayout();
 
-    public TextField firstname = new TextField("Vezetéknév");
-    public TextField lastname = new TextField("Keresztnév");
-    public TextField maidenName = new TextField("Leánykori név");
-    public TextField motherName = new TextField("Anyja neve");
-    public TextField birthPlace = new TextField("Születési hely");
-    public DatePicker birthDate = new DatePicker("Születési idő");
+    private TextField firstname = new TextField("Vezetéknév");
+    private TextField lastname = new TextField("Keresztnév");
+    private TextField maidenName = new TextField("Leánykori név");
+    private TextField motherName = new TextField("Anyja neve");
+    private TextField birthPlace = new TextField("Születési hely");
+    private DatePicker birthDate = new DatePicker("Születési idő");
 
     private TextField postalCode = new TextField("Iranyítószám");
     private TextField city = new TextField("Város");
@@ -76,14 +77,14 @@ public class ClientView extends Composite<VerticalLayout> {
     final String REGEXTAJ = "^\\d{9}$";
     final String REGEXTEL = "^(\\d{2})(\\d{7})$";
 
-    public ClientView(ClientRepository clientRepository) {
-        this.clientRepository = clientRepository;
+    public ClientView (Repository repository) {
+        this.repository=repository;
 
-        dialogBaseLayout = new VerticalLayout();
-        addressDataLayout = new HorizontalLayout();
-        idDataLayout = new HorizontalLayout();
-        buttonLayout = new HorizontalLayout();
-        contactDataLayout = new HorizontalLayout();
+//        dialogBaseLayout = new VerticalLayout();
+//        addressDataLayout = new HorizontalLayout();
+//        idDataLayout = new HorizontalLayout();
+//        buttonLayout = new HorizontalLayout();
+//        contactDataLayout = new HorizontalLayout();
 
         firstname.setRequired(true);
         lastname.setRequired(true);
@@ -177,7 +178,7 @@ public class ClientView extends Composite<VerticalLayout> {
         });
 
         editSaveButton.addClickListener(event -> {
-            clientRepository.update(client);
+            repository.updateClients(client);
             Notification.show("Módosítva!");
         });
 
@@ -285,7 +286,7 @@ public class ClientView extends Composite<VerticalLayout> {
         binder.readBean(client);
         try {
           if (client.getId()== null){
-              clientRepository.create(client);
+              repository.createClients(client);
               Notification.show("Mentve!");
           }else {
          //     clientRepository.update(client);
@@ -309,14 +310,19 @@ public class ClientView extends Composite<VerticalLayout> {
         idDataLayout.setEnabled(client != null);
         binder.setBean(client);
     }
+
     private void updateGrid() {
-        grid.setItems(clientRepository.findAll());
+        try {
+            grid.setItems(repository.findAllClients());
+        } catch (Exception e) {
+            System.out.println("FindAll Ügyfél hiba! "+e.getLocalizedMessage());
+        }
     }
     void delete() {
         try {
             // grid.asSingleSelect();
             binder.readBean(client);
-            clientRepository.delete(client);
+            repository.deleteClients(client);
             Notification.show("Törölve!");
             grid.asSingleSelect().clear();
             binder.setBean(null);
