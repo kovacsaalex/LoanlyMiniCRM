@@ -49,7 +49,7 @@ public class LoanView extends Composite<VerticalLayout> {
     private TextField loanTerm = new TextField("Futamidő");
     private TextField interestRate = new TextField("Kamatláb");
 
-    private TextField idNumber = new TextField("Iranyítószám");
+    private TextField idNumber = new TextField("HRSZ");
     private TextField postalCode = new TextField("Iranyítószám");
     private TextField city = new TextField("Város");
     private TextField address = new TextField("Cím");
@@ -57,6 +57,10 @@ public class LoanView extends Composite<VerticalLayout> {
     private TextField size = new TextField("Méret");
     private TextField value = new TextField("Értéke");
     ComboBox<String> comboBoxStatus = new ComboBox<>("Állapot");
+
+    private Button confirmButton = new Button("Mentés");
+    private Button create = new Button("Új");
+    private Button editSaveButton = new Button("Módosítás");
 
 
 
@@ -115,11 +119,25 @@ public class LoanView extends Composite<VerticalLayout> {
             //   dialog.add(cancelButton);
         });
 
+        cancelButton.addClickListener(event -> {
+
+            try {
+                grid.asSingleSelect().clear();
+                updateGrid();
+                dialog.close();
+
+                // messageLabel.setText("Cancelled...");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
 
         // Layouts Adding
         loanDataLayout.add(comboBox,amount,loanStart,loanEnd,loanTerm,interestRate);
         addressDataLayout.add(idNumber,postalCode,city,address);
         houseDataLayout.add(size,value,comboBoxStatus);
+        buttonLayout.add(confirmButton,create,cancelButton,editSaveButton);
         dialogBaseLayout.add(dialogLabelText,loanDataLayout, addressDataLayout,houseDataLayout);
         beforeFooter.add(loanAddButton,deleteButton,loanEditButton,loanAddClientButton);
         content.setSizeFull();
