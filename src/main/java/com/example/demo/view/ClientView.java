@@ -1,7 +1,6 @@
 package com.example.demo.view;
 
 import com.example.demo.model.Client;
-import com.example.demo.service.ClientRepository;
 import com.example.demo.service.Repository;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.Text;
@@ -33,6 +32,7 @@ public class ClientView extends Composite<VerticalLayout> {
     private Dialog dialog = new Dialog();
     Dialog alert = new Dialog();
 
+    //Layouts
     VerticalLayout content = new VerticalLayout();
     private HorizontalLayout personalDataLayout = new HorizontalLayout();
     private VerticalLayout dialogBaseLayout = new VerticalLayout();
@@ -42,6 +42,8 @@ public class ClientView extends Composite<VerticalLayout> {
     private HorizontalLayout buttonLayout = new HorizontalLayout();
     HorizontalLayout beforeFooter = new HorizontalLayout();
 
+
+    // Fields for the forms
     private TextField firstname = new TextField("Vezetéknév");
     private TextField lastname = new TextField("Keresztnév");
     private TextField maidenName = new TextField("Leánykori név");
@@ -67,7 +69,7 @@ public class ClientView extends Composite<VerticalLayout> {
 
     private Button confirmButton = new Button("Mentés");
     private Button create = new Button("Új");
-    Button editSaveButton = new Button("Módosítás");
+    private Button editSaveButton = new Button("Módosítás");
 
     final String REGEXNAME = "([A-Za-zaáeéiíoóöőuúüűAÁEÉIÍOÓÖŐUÚÜŰ .-]+)";
     final String REGEXPOSTALCODE = "\\d{4}$";

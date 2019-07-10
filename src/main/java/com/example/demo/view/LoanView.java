@@ -6,13 +6,20 @@ import com.example.demo.service.Repository;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.datepicker.DatePicker;
+import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.Route;
+
+import java.time.LocalDate;
 
 @Route("loans")
 public class LoanView extends Composite<VerticalLayout> {
@@ -24,13 +31,44 @@ public class LoanView extends Composite<VerticalLayout> {
 
     VerticalLayout content = new VerticalLayout();
     HorizontalLayout beforeFooter = new HorizontalLayout();
-    VerticalLayout dialogBaseLayout;
-    HorizontalLayout loanDataLayout;
-    HorizontalLayout addressDataLayout;
+    VerticalLayout dialogBaseLayout = new VerticalLayout();
+    HorizontalLayout loanDataLayout = new HorizontalLayout();
+    HorizontalLayout addressDataLayout = new HorizontalLayout();
+    HorizontalLayout houseDataLayout = new HorizontalLayout();
+    private HorizontalLayout buttonLayout = new HorizontalLayout();
+
+    private Dialog dialog = new Dialog();
+    Dialog alert = new Dialog();
+
+    private H3 dialogLabelText = new H3("Új hitel adatai");
+
+    ComboBox<String> comboBox = new ComboBox<>("Hitel Típusa");
+    private TextField amount = new TextField("Hitel Összege");
+    private DatePicker loanStart = new DatePicker("Hitel kezdete");
+    private DatePicker loanEnd = new DatePicker("Hitel vége");
+    private TextField loanTerm = new TextField("Futamidő");
+    private TextField interestRate = new TextField("Kamatláb");
+
+    private TextField idNumber = new TextField("Iranyítószám");
+    private TextField postalCode = new TextField("Iranyítószám");
+    private TextField city = new TextField("Város");
+    private TextField address = new TextField("Cím");
+
+    private TextField size = new TextField("Méret");
+    private TextField value = new TextField("Értéke");
+    ComboBox<String> comboBoxStatus = new ComboBox<>("Állapot");
+
+
 
     public LoanView(Repository repository ) {
         this.repository=repository;
 
+        comboBox.setItems("Ingatlancélú", "Építési", "Kiváltás",
+                "Szabad felhasználású");
+
+        comboBoxStatus.setItems("Elkészült", "Építés alatt");
+
+       // loanTerm.setPlaceholder(String.valueOf(loanStart.getValue())); ??
 
         //Grid Loan
         grid.addColumn(Loan::getLoanId).setHeader("Id").setWidth("60px");
@@ -66,8 +104,23 @@ public class LoanView extends Composite<VerticalLayout> {
 
         Button cancelButton = new Button("Bezárás");
 
+        //Clicklisteners
+
+        loanAddButton.addClickListener(event -> {
+           // dialog.setCloseOnEsc(false);
+            dialog.setCloseOnOutsideClick(false);
+            dialog.add(dialogBaseLayout,buttonLayout);
+            dialog.open();
+            createClicked();
+            //   dialog.add(cancelButton);
+        });
+
 
         // Layouts Adding
+        loanDataLayout.add(comboBox,amount,loanStart,loanEnd,loanTerm,interestRate);
+        addressDataLayout.add(idNumber,postalCode,city,address);
+        houseDataLayout.add(size,value,comboBoxStatus);
+        dialogBaseLayout.add(dialogLabelText,loanDataLayout, addressDataLayout,houseDataLayout);
         beforeFooter.add(loanAddButton,deleteButton,loanEditButton,loanAddClientButton);
         content.setSizeFull();
         content.setWidth("100%");

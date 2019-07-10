@@ -1,15 +1,11 @@
 package com.example.demo.view;
 
-import com.example.demo.model.Client;
-import com.example.demo.service.ClientRepository;
-import com.example.demo.service.LoanRepository;
 import com.example.demo.service.Repository;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.checkbox.Checkbox;
-import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
