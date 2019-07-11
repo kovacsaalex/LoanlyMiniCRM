@@ -16,3 +16,5 @@ Check the app here:
 
 https://loanlyweb.herokuapp.com
 
+//First time it will be load slowly
+
