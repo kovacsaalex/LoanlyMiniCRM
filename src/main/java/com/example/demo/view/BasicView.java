@@ -24,7 +24,7 @@ import com.vaadin.flow.theme.lumo.Lumo;
 public class BasicView extends Composite<VerticalLayout> {
 
     private Repository repository;
-    private Charts charts;
+    //private Charts charts;
 
     public BasicView(Repository repository) {
         this.repository = repository;
