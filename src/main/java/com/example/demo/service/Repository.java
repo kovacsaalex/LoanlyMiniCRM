@@ -15,6 +15,13 @@ public interface Repository {
     @Select("SELECT * FROM testdbase.loan;")
     List<Loan> findAllLoans();
 
+    @Select("SELECT COUNT(id) FROM testdbase.client;")
+    int countAllClients();
+
+    @Select("SELECT COUNT(\"loanId\")FROM testdbase.loan;")
+    int countAllLoans();
+
+
     @Update("UPDATE testdbase.client SET lastname=#{lastname},firstname=#{firstname},\"maidenName\"=#{maidenName}, \"birthPlace\"=#{birthPlace},\"birthDate\"=#{birthDate},\"motherName\"=#{motherName},\"postalCode\"=#{postalCode},city=#{city},address=#{address},\"movingTime\"=#{movingTime},\"personalID\"=#{personalID},\"cardId\"=#{cardId},\"addressCardID\"=#{addressCardID},\"taxID\"=#{taxID},\"socialSecurityCard\"=#{socialSecurityCard},\"phoneNumber\"=#{phoneNumber},email=#{email} WHERE ID=#{id}")
         // @Update("UPDATE testdbase.client SET lastname=#{lastname},
         // firstname=#{firstname} WHERE id=#{Id}")
@@ -30,4 +37,6 @@ public interface Repository {
 
     @Delete("DELETE FROM testdbase.client WHERE ID=#{id}")
     void deleteClients(Client client);
+
+ //   DELETE FROM testdbase.loan WHERE "loanId"=2;
 }

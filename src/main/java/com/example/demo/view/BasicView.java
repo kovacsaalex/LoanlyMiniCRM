@@ -5,6 +5,8 @@ import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.charts.Chart;
+import com.vaadin.flow.component.charts.model.*;
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.icon.Icon;
@@ -22,6 +24,7 @@ import com.vaadin.flow.theme.lumo.Lumo;
 public class BasicView extends Composite<VerticalLayout> {
 
     private Repository repository;
+    private Charts charts;
 
     public BasicView(Repository repository) {
         this.repository = repository;
@@ -102,7 +105,7 @@ public class BasicView extends Composite<VerticalLayout> {
 
         homeButton.addClickListener(event -> {
             content.removeAll();
-            content.add(headerH3, welcomeText, text, checkbox1, checkbox2, checkbox3, checkbox4, checkbox5);
+            content.add(headerH3, welcomeText, text, checkbox1, checkbox2, checkbox3, checkbox4, checkbox5,getCharts());
         });
 
         loanButton.addClickListener(event -> {
@@ -119,9 +122,51 @@ public class BasicView extends Composite<VerticalLayout> {
         footer.setPadding(true);
         footer.setHeight("50px");
         footer.getStyle().set("background-color", "#444444");
-        content.add(headerH3, welcomeText, text, checkbox1, checkbox2, checkbox3, checkbox4, checkbox5);
+        content.add(headerH3, welcomeText, text, checkbox1, checkbox2, checkbox3, checkbox4, checkbox5,getCharts());
         center.add(content);
         getContent().add(header, center, footer);
         getContent().expand(center);
     }
+    Chart getCharts(){
+
+        Chart chart = new Chart();
+
+        Configuration configuration = chart.getConfiguration();
+        configuration.setTitle("Adatbázis Állapota");
+        configuration.setSubTitle("Tesztidőszak!");
+        chart.getConfiguration().getChart().setType(ChartType.COLUMN);
+        //chart.getConfiguration().getChart().setType(ChartType.AREA);
+
+
+
+
+//        configuration.addSeries(new ListSeries("Ügyfelek", 1, 1, 1, 1, 1, 1, 5, 7, 6, 8, 11, 4));
+//        configuration.addSeries(new ListSeries("Hitelek", 1, 1, 1, 1, 1, 1, 6, 8, 5, 9, 10, 6));
+
+        configuration.addSeries(new ListSeries("Ügyfelek", repository.countAllClients()));
+        configuration.addSeries(new ListSeries("Hitelek", repository.countAllLoans()));
+        configuration.addSeries(new ListSeries("Ltp", 0));
+
+
+        XAxis x = new XAxis();
+        x.setCrosshair(new Crosshair());
+//        x.setCategories("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug",
+//                "Sep", "Oct", "Nov", "Dec");
+        x.setCategories("");
+        configuration.addxAxis(x);
+
+        YAxis y = new YAxis();
+        y.setMin(0);
+        y.setTitle("Állapot (db)");
+        configuration.addyAxis(y);
+
+        Tooltip tooltip = new Tooltip();
+        tooltip.setShared(true);
+        configuration.setTooltip(tooltip);
+        //chart.setWidth("80%");
+
+       return chart;
+    }
+
+
 }
